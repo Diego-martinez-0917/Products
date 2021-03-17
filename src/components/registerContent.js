@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, CardContent, TextField } from "@material-ui/core";
+import { Button, CardContent, TextField, Typography } from "@material-ui/core";
 
 export default function RegisterContent({
   onChangeEmail,
@@ -9,6 +9,7 @@ export default function RegisterContent({
   email,
   password,
   passwordConfirm,
+  errorMenssage
 }) {
   return (
     <CardContent className="register-content">
@@ -19,6 +20,7 @@ export default function RegisterContent({
         label="email"
         onChange={onChangeEmail}
         value={email}
+        error={errorMenssage!==''}
       />
       <TextField
         required
@@ -28,6 +30,7 @@ export default function RegisterContent({
         type="password"
         onChange={onChangePass}
         value={password}
+        error={errorMenssage!==''}
       />
       <TextField
         required
@@ -37,7 +40,9 @@ export default function RegisterContent({
         type="password"
         onChange={onChangePassConfirm}
         value={passwordConfirm}
+        error={errorMenssage!==''}
       />
+      <Typography>{errorMenssage}</Typography>
       <Button
         className="button"
         variant="contained"

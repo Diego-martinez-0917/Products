@@ -11,6 +11,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [errorMenssage, setErrorMenssage] = useState("");
 
   const onSubmitLoginGoogle = () => {
     var provider = new firebase.auth.GoogleAuthProvider();
@@ -22,7 +23,7 @@ export default function Login() {
         history.push("/");
       })
       .catch((error) => {
-        console.error(error.code, error.message);
+        setErrorMenssage(error.message);
       });
   };
 
@@ -31,24 +32,29 @@ export default function Login() {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((user) => {
-        localStorage.setItem('userID',user.user.uid)
+        localStorage.setItem("userID", user.user.uid);
         history.push("/");
       })
       .catch((error) => {
-        console.error(error.code, error.message);
+        setErrorMenssage(error.message);
       });
   };
 
   const onSubmitRegister = () => {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((user) => {
-        onSubmitLogin();
-      })
-      .catch((error) => {
-        console.error(error.code, error.message);
-      });
+    if (password !== passwordConfirm) {
+      setErrorMenssage("fields do not match do not match");
+    }
+    else{
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then((user) => {
+          onSubmitLogin();
+        })
+        .catch((error) => {
+          setErrorMenssage(error.message);
+        });
+    }
   };
 
   const onChangeEmail = (event) => {
@@ -84,6 +90,7 @@ export default function Login() {
             onSubmitLoginGoogle={onSubmitLoginGoogle}
             email={email}
             password={password}
+            errorMenssage={errorMenssage}
           />
         ) : (
           <RegisterContent
@@ -94,6 +101,7 @@ export default function Login() {
             email={email}
             password={password}
             passwordConfirm={passwordConfirm}
+            errorMenssage={errorMenssage}
           />
         )}
       </Card>

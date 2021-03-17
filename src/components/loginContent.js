@@ -8,6 +8,7 @@ export default function LoginContent({
   onSubmitLoginGoogle,
   email,
   password,
+  errorMenssage
 }) {
   return (
     <CardContent className="login-content">
@@ -18,6 +19,7 @@ export default function LoginContent({
         label="email"
         onChange={onChangeEmail}
         value={email}
+        error={errorMenssage!==''}
       />
       <TextField
         required
@@ -27,7 +29,9 @@ export default function LoginContent({
         type="password"
         onChange={onChangePass}
         value={password}
+        error={errorMenssage!==''}
       />
+      <Typography>{errorMenssage}</Typography>
       <Button
         className="button"
         variant="contained"
