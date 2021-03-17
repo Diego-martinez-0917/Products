@@ -1,0 +1,9 @@
+.App {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+}
+
+@import "./pages/login/login.scss";
+@import "./pages/header/header.scss";
+@import "./pages/main/main.scss"

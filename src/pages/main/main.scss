@@ -1,0 +1,59 @@
+.main-content {
+  button {
+    margin-right: 10px;
+  }
+
+  .container-body {
+    display: grid;
+    grid-template-columns: 25vw auto;
+    grid-template-areas: "cre .";
+    min-height: 90%;
+    gap: 20px;
+    padding-left: 10px;
+    .create {
+      align-self: center;
+      grid-area: cre;
+      display: grid;
+      grid-template-rows: repeat(6, min-content);
+      gap: 20px;
+      border: 1px solid gray;
+      border-radius: 20px;
+      box-shadow: 5px 5px 5px gray;
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      .text-input {
+        width: 80%;
+        justify-self: center;
+      }
+
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      .bt-create-submit {
+        width: 80%;
+        height: 40px;
+        border-radius: 10px;
+        border-style: solid;
+        font-size: large;
+        justify-self: center;
+      }
+    }
+    .table-container {
+      overflow-y: scroll;
+      height: 90vh;
+      
+      .table {
+        .descriptio-cell {
+          white-space: pre-wrap;
+          width: 35%;
+        }
+      }
+    }
+  }
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
