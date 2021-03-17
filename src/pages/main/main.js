@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import firebase from "../../utils/firebaseConfig";
 import Header from "../header/header";
@@ -21,16 +22,20 @@ export default function MainView() {
   const [data, setData] = useState([]);
   useEffect(() => {
     let datafirebase = [];
-    firebase
-      .firestore()
-      .collection(localStorage.getItem("userID"))
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          datafirebase.push({ ...doc.data(), id: doc.id });
+    if (localStorage.getItem("userID") === null) {
+      history.push("/login");
+    } else {
+      firebase
+        .firestore()
+        .collection(localStorage.getItem("userID"))
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            datafirebase.push({ ...doc.data(), id: doc.id });
+          });
+          setData(datafirebase);
         });
-        setData(datafirebase);
-      });
+    }
   }, [reload]);
 
   const onsubmit = () => {
@@ -88,7 +93,7 @@ export default function MainView() {
             No products were found with this user
           </Typography>
         ) : (
-          <TableContainer className='table-container' >
+          <TableContainer className="table-container">
             <Table className="table" aria-label="simple table">
               <TableHead>
                 <TableRow>
